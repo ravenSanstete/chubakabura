@@ -1,0 +1,78 @@
+\documentclass[letterpaper]{article}
+\usepackage{aaai}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+
+
+\title{Learning Natural Descent via Implicit Approximation of Underlying Parameter Manifold}
+\author{Pan}
+\begin{document}
+\maketitle
+\begin{abstract}
+  This paper focuses on how to dynamically constrain a given optimization problem expressed in a total space(e.g. $\mathbb{E}^n$ n-dimension \textit{Euclidean} space) to one of its proper submanifold(e.g. $S^{n-1}$, n-dimension sphere) with asymptotic one-order smoothness.
+  Recent studies have shown that such a restriction is reasonable if the submanifold can be equipped with tractable gradient and curvature terms. In such a case, we can always
+  apply Riemmanian optimization efficiently over the intrinsitic geometry of the parameter space, which may even bring improvements of model performance according to some recent experimental results. However, such an assumption
+  varies with the underlying problem, thus sometimes it is hard to find a proper one. In order to make the powerful Riemmanian methods accessible to more realisic modeling tasks, we present a model-free method which constrains
+  parameters to a smooth manifold dynamically via online approximation of the corresponding projection and retraction operator defined on the total space. The reader may also consider this work as a \textit{neuralized} version of the
+  classical algorithms in the literature of Riemmannian optimization and elementary Differential Geometry.
+\end{abstract}
+
+\section{Background}
+In the context of optimization, we are always talking about the gradient of a given loss function, i.e. $f:\mathbb{R}^k\to{\mathbb{R}}$
+$$
+grad\quad f(x^{*})=  \begin{pmatrix}
+  \frac{\partial{f}}{x_1} \\
+  \vdots \\
+  \frac{\partial{f}}{x_k} \\
+\end{pmatrix}\Bigg{|}_{x^{*}}
+$$
+
+It is always efficient enough to use such a gradient to do descent in the total space unless the innate geometry structure of the given loss function indicates non-triviality.
+
+We begin our discussion by presenting a toy problem to illustrate our first point.
+
+\subsection{Toy Problem}
+$$
+  minimize \quad f(x,y) = (2-\frac{x^2}{x^2+y^2})({({\sqrt{x^2+y^2}}-1)^2+1}) \quad (1)
+$$
+
+It is actually a well-crafted problem, because if you are familiar with the polar coordinate representation, you can reformulate
+it into a simpler form at a glance.
+
+$$
+  minimize \quad \tilde{f}(r,\theta)=(1+\mathbf{sin}^2\theta)((r-1)^2+1) \quad (2)
+$$
+
+which reduces the minimization of the complicated function on $\mathbb{R}^2$ with coupled variables to minimization of two simple
+functions respectively\textit{[notice the positiveness here]} along a line($\mathbb{R}$) and a circle($\mathbf{S}^1$). We say the induced manifold by product($\mathbf{D}^1$, 2-dimension disk) can be considered as an embedding submanifold of
+the total space $\mathbb{R}^2$.
+
+We may summarize the toy problem as follows,
+\begin{enumerate}
+  \item Do gradient descent in the total space sometimes bring extra complexity
+  \item Loss function itself indicates the possible geometry of the search space
+\end{enumerate}
+
+The most efficient method to minimize (1) is just by reparametrizing the search space and thus the gradient. Then do gradient descent in
+the new coordinate frame. Remember that \textit{reparametrization} is only the beginning of this story.
+
+\subsection{Riemmannian Geometry}
+Riemmanian geometry studies abstract differentiable manifold equipped with a Riemmanian metric $g$, which satisfies
+\begin{enumerate}
+  \item Bilinearity
+  \item Symmetry
+  \item Non-Degeneracy
+\end{enumerate}
+
+
+
+
+\section{Motivation}
+
+\end{document}
